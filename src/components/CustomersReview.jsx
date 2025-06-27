@@ -54,11 +54,11 @@ export default function CustomersReview() {
         </div>
 
         <Marquee speed={40} pauseOnHover gradient={false}>
-          <div className="flex space-x-8 py-5">
+          <div className="flex space-x-8 py-5 sm:gap-2 md:gap-8">
             {reviews.map((review) => (
               <Card
                 key={review.id}
-                className="bg-white shadow-md border mx-1 border-gray-200 w-96 "
+                className="bg-white shadow-md border mx-1  border-gray-200 w-96 "
               >
                 <CardContent className="p-6 h-full flex flex-col justify-between">
                   <div className="mb-4">
