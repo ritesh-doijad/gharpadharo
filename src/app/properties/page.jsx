@@ -3,8 +3,6 @@
 import { useState, useMemo, useCallback, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
-  slideUp,
-  slideLeft,
   scaleFade,
   fadeUpSoft,
 } from "@/utils/motionVariants";
@@ -135,8 +133,6 @@ export default function PropertyListingPage() {
           return dateB - dateA;
         });
         break;
-      default:
-        break;
     }
 
     const totalItems = sortedFiltered.length;
@@ -148,9 +144,7 @@ export default function PropertyListingPage() {
     return { paginatedProperties, totalPages, totalItems };
   }, [filters, sortBy, currentPage, itemsPerPage]);
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [filters, sortBy]);
+  useEffect(() => setCurrentPage(1), [filters, sortBy]);
 
   const clearAllFilters = useCallback(() => {
     setFilters({
@@ -166,8 +160,8 @@ export default function PropertyListingPage() {
     setSortBy("relevance");
   }, []);
 
-  const hasActiveFilters = useMemo(() => {
-    return (
+  const hasActiveFilters = useMemo(
+    () =>
       filters.keyword ||
       filters.accommodation !== "all" ||
       filters.propertyType !== "all" ||
@@ -176,9 +170,9 @@ export default function PropertyListingPage() {
       filters.availableFor !== "all" ||
       filters.priceRange[0] !== 1000 ||
       filters.priceRange[1] !== 150000 ||
-      filters.amenities.length > 0
-    );
-  }, [filters]);
+      filters.amenities.length > 0,
+    [filters]
+  );
 
   useEffect(() => {
     if (showFilters) {
@@ -196,27 +190,23 @@ export default function PropertyListingPage() {
 
   return (
     <div className="bg-gray-50 p-4 md:p-12 xl:px-36 min-h-screen">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="flex flex-col lg:flex-row gap-6">
           <motion.div
             initial={scaleFade.initial}
             whileInView={scaleFade.animate}
             transition={scaleFade.transition}
             viewport={{ once: true }}
-            className={`lg:w-80 xl:w-96 w-full ${
+            className={`w-full lg:w-80 xl:w-96 ${
               showFilters
-                ? "block fixed inset-0 z-50 bg-white overflow-y-auto"
+                ? "fixed inset-0 z-50 bg-white overflow-y-auto p-4"
                 : "hidden lg:block"
             }`}
           >
             <div className="bg-white rounded-lg shadow-sm p-4 mb-4 lg:hidden">
               <div className="flex items-center justify-between">
                 <h3 className="font-semibold">Filters</h3>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setShowFilters(false)}
-                >
+                <Button variant="ghost" size="sm" onClick={() => setShowFilters(false)}>
                   <X className="w-4 h-4" />
                 </Button>
               </div>
@@ -228,37 +218,28 @@ export default function PropertyListingPage() {
             />
             {hasActiveFilters && (
               <div className="mt-4">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={clearAllFilters}
-                  className="w-full"
-                >
+                <Button variant="outline" size="sm" onClick={clearAllFilters} className="w-full">
                   Clear All Filters
                 </Button>
               </div>
             )}
           </motion.div>
 
-          <motion.div  initial={scaleFade.initial}
-                  whileInView={scaleFade.animate}
-                  transition={scaleFade.transition}
-                  viewport={{ once: true }} className="flex-1 w-full">
-            <div
-              className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6"
-            >
+          <motion.div
+            initial={scaleFade.initial}
+            whileInView={scaleFade.animate}
+            transition={scaleFade.transition}
+            viewport={{ once: true }}
+            className="flex-1 w-full"
+          >
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
               <div>
-                <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
-                  Property Listing
-                </h1>
+                <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Property Listing</h1>
                 <p className="text-gray-600">
                   Showing {(currentPage - 1) * itemsPerPage + 1}-
-                  {Math.min(currentPage * itemsPerPage, totalItems)} of{" "}
-                  {totalItems} properties
+                  {Math.min(currentPage * itemsPerPage, totalItems)} of {totalItems} properties
                   {hasActiveFilters && (
-                    <span className="ml-2 text-sm text-blue-600">
-                      (filtered)
-                    </span>
+                    <span className="ml-2 text-sm text-blue-600">(filtered)</span>
                   )}
                 </p>
               </div>
@@ -269,8 +250,7 @@ export default function PropertyListingPage() {
                   className="lg:hidden"
                   onClick={() => setShowFilters(!showFilters)}
                 >
-                  <SlidersHorizontal className="w-4 h-4 mr-2" />
-                  Filters
+                  <SlidersHorizontal className="w-4 h-4 mr-2" /> Filters
                   {hasActiveFilters && (
                     <span className="ml-1 bg-blue-500 text-white text-xs rounded-full w-2 h-2"></span>
                   )}
@@ -281,12 +261,8 @@ export default function PropertyListingPage() {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="relevance">Relevance</SelectItem>
-                    <SelectItem value="price-low">
-                      Price: Low to High
-                    </SelectItem>
-                    <SelectItem value="price-high">
-                      Price: High to Low
-                    </SelectItem>
+                    <SelectItem value="price-low">Price: Low to High</SelectItem>
+                    <SelectItem value="price-high">Price: High to Low</SelectItem>
                     <SelectItem value="rating">Highest Rated</SelectItem>
                     <SelectItem value="newest">Newest First</SelectItem>
                   </SelectContent>
@@ -296,42 +272,33 @@ export default function PropertyListingPage() {
 
             {paginatedProperties.length > 0 ? (
               <>
-                <div
-                 
-                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2"
-                >
+                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
                   {paginatedProperties.map((property) => (
                     <PropertyCard key={property.id} property={property} />
                   ))}
                 </div>
 
                 {totalPages > 1 && (
-                  <div className="mt-8 flex justify-center">
-                    <Pagination>
-                      <PaginationContent>
-                        <PaginationItem>
-                          <PaginationPrevious
-                            href="#"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              if (currentPage > 1)
-                                setCurrentPage(currentPage - 1);
-                            }}
-                            className={
-                              currentPage <= 1
-                                ? "pointer-events-none opacity-50"
-                                : ""
-                            }
-                          />
-                        </PaginationItem>
+                  <div className="mt-8 overflow-x-auto w-full">
+                    <div className="flex justify-center min-w-[320px]">
+                      <Pagination>
+                        <PaginationContent>
+                          <PaginationItem>
+                            <PaginationPrevious
+                              href="#"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                if (currentPage > 1) setCurrentPage(currentPage - 1);
+                              }}
+                              className={currentPage <= 1 ? "pointer-events-none opacity-50" : ""}
+                            />
+                          </PaginationItem>
 
-                        {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-                          (page) => {
+                          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
                             if (
                               page === 1 ||
                               page === totalPages ||
-                              (page >= currentPage - 1 &&
-                                page <= currentPage + 1)
+                              (page >= currentPage - 1 && page <= currentPage + 1)
                             ) {
                               return (
                                 <PaginationItem key={page}>
@@ -347,10 +314,7 @@ export default function PropertyListingPage() {
                                   </PaginationLink>
                                 </PaginationItem>
                               );
-                            } else if (
-                              page === currentPage - 2 ||
-                              page === currentPage + 2
-                            ) {
+                            } else if (page === currentPage - 2 || page === currentPage + 2) {
                               return (
                                 <PaginationItem key={page}>
                                   <PaginationEllipsis />
@@ -358,26 +322,23 @@ export default function PropertyListingPage() {
                               );
                             }
                             return null;
-                          }
-                        )}
+                          })}
 
-                        <PaginationItem>
-                          <PaginationNext
-                            href="#"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              if (currentPage < totalPages)
-                                setCurrentPage(currentPage + 1);
-                            }}
-                            className={
-                              currentPage >= totalPages
-                                ? "pointer-events-none opacity-50"
-                                : ""
-                            }
-                          />
-                        </PaginationItem>
-                      </PaginationContent>
-                    </Pagination>
+                          <PaginationItem>
+                            <PaginationNext
+                              href="#"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+                              }}
+                              className={
+                                currentPage >= totalPages ? "pointer-events-none opacity-50" : ""
+                              }
+                            />
+                          </PaginationItem>
+                        </PaginationContent>
+                      </Pagination>
+                    </div>
                   </div>
                 )}
               </>

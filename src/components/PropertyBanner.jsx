@@ -4,16 +4,15 @@ import { ChevronRight } from "lucide-react";
 
 export default function PropertyBanner() {
   return (
-    <div className="w-full p-3 my-15 lg:px-30">
-      {/* Main Banner Card */}
-      <div className="flex flex-col md:flex-row items-center justify-center lg:justify-between bg-[#f3f6fd] rounded-3xl shadow-2xl w-full h-80 relative">
+    <section className="w-full px-4 sm:px-6 lg:px-20 py-10">
+      <div className="flex flex-col md:flex-row items-center justify-between bg-[#f3f6fd] rounded-3xl shadow-2xl overflow-hidden">
         
-        {/* Left Text Content */}
-        <div className="max-w-lg p-8 md:p-12 flex flex-col justify-center items-center">
+        {/* Left - Text */}
+        <div className="w-full md:w-1/2 px-6 sm:px-10 py-10 flex flex-col items-center md:items-start text-center md:text-left">
           <p className="text-sm font-semibold text-blue-600 uppercase">
             Become Partners
           </p>
-          <h2 className="text-2xl lg:text-3xl font-bold text-black mt-2 text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold text-black mt-2">
             List your Properties on{" "}
             <span className="text-primary font-bold">GharPadharo</span>, join us now!
           </h2>
@@ -23,17 +22,17 @@ export default function PropertyBanner() {
           </Button>
         </div>
 
-        {/* Right Image - Cutout effect */}
-        <div className="right-0 hidden lg:block relative -top-5 w-full lg:w-[617px] h-[360px] mt-10 lg:mt-0">
+        {/* Right - Image */}
+        <div className="w-full md:w-1/2 hidden md:block relative h-64 sm:h-72 md:h-80 lg:h-96">
           <Image
             src="/images/home-cutout.webp"
             alt="Modern house with red and white exterior"
             fill
-            className=""
+            className="object-contain object-center"
             priority
           />
         </div>
       </div>
-    </div>
+    </section>
   );
 }

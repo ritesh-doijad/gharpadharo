@@ -42,45 +42,43 @@ export default function CustomersReview() {
   };
 
   return (
-    <div className="bg-white pt-12 pb-20 px-4">
+    <section className="bg-white pt-12 pb-20 px-4 sm:px-6">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+        <div className="text-center mb-12 px-2">
+          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
             Customer Reviews
           </h1>
-          <p className="text-lg text-gray-600">
+          <p className="text-base sm:text-lg text-gray-600">
             See what our customers are saying about us
           </p>
         </div>
 
         <Marquee speed={40} pauseOnHover gradient={false}>
-          <div className="flex space-x-8 py-5 sm:gap-2 md:gap-8">
+          <div className="flex gap-x-4 sm:gap-x-6 md:gap-x-8 py-5">
             {reviews.map((review) => (
               <Card
                 key={review.id}
-                className="bg-white shadow-md border mx-1  border-gray-200 w-96 "
+                className="bg-white shadow-md border border-gray-200 w-80 sm:w-96 mx-1"
               >
-                <CardContent className="p-6 h-full flex flex-col justify-between">
-                  <div className="mb-4">
-                    <p className="text-gray-700 text-md leading-relaxed">
-                      {review.text}
-                    </p>
-                  </div>
+                <CardContent className="p-5 sm:p-6 h-full flex flex-col justify-between">
+                  {/* Review text */}
+                  <p className="text-gray-700 text-sm sm:text-base mb-4 leading-relaxed">
+                    {review.text}
+                  </p>
 
-                  <div className="flex justify-between items-center">
-                    <div className="flex space-x-1">
-                      {renderStars(review.rating)}
-                    </div>
+                  {/* Stars + Reviewer */}
+                  <div className="flex justify-between items-center mt-auto">
+                    <div className="flex space-x-1">{renderStars(review.rating)}</div>
                     <div className="flex items-center space-x-3">
-                      <p className="font-medium text-gray-900 text-sm">
+                      <p className="font-medium text-gray-900 text-sm truncate max-w-[100px]">
                         {review.name}
                       </p>
-                      <Avatar className="w-10 h-10">
+                      <Avatar className="w-9 h-9 sm:w-10 sm:h-10">
                         <AvatarImage
                           src={review.avatar || "/placeholder.svg"}
                           alt={review.name}
                         />
-                        <AvatarFallback className="bg-gray-200 text-gray-600 text-sm">
+                        <AvatarFallback className="bg-gray-200 text-gray-600 text-xs sm:text-sm">
                           {review.name
                             .split(" ")
                             .map((n) => n[0])
@@ -95,6 +93,6 @@ export default function CustomersReview() {
           </div>
         </Marquee>
       </div>
-    </div>
+    </section>
   );
 }

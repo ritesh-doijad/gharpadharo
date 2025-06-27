@@ -1,13 +1,12 @@
 "use client";
 import React, { useState } from "react";
-
 import { Wifi, BedDouble, Droplet } from "lucide-react";
 import PropertyCard from "./PropertyCard";
-
 import { Button } from "./ui/button";
 
 const PropertiesList = () => {
   const [activeFilter, setActiveFilter] = useState("All");
+
   const dummyProperties = [
     {
       id: 1,
@@ -82,17 +81,19 @@ const PropertiesList = () => {
   );
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-16 sm:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-12">
-          <div>
-            <h2 className="text-4xl lg:text-5xl text-neutral lg:leading-14 font-bold text-gray-900 ">
-              Discover Latest <br />
+        {/* Header */}
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-10 sm:mb-12 gap-6">
+          <div className="text-center lg:text-left">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-snug">
+              Discover Latest <br className="hidden sm:block" />
               Properties
             </h2>
           </div>
 
-          <div className="flex space-x-2 mt-6 lg:mt-0">
+          {/* Filter Buttons */}
+          <div className="flex flex-wrap gap-2 justify-center lg:justify-end">
             {["All", "Apartment", "PG", "Hostel"].map((filter) => (
               <Button
                 key={filter}
@@ -100,8 +101,8 @@ const PropertiesList = () => {
                 className={`${
                   activeFilter === filter
                     ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white"
-                    : "bg-white text-gray-600 hover:bg-gray-50 border-gray-200"
-                } transition-all duration-200`}
+                    : "bg-white text-gray-600 hover:bg-gray-50 border border-gray-200"
+                } transition-all duration-200 text-sm px-4 py-2`}
                 onClick={() => setActiveFilter(filter)}
               >
                 {filter}
@@ -110,6 +111,7 @@ const PropertiesList = () => {
           </div>
         </div>
 
+        {/* Properties Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredProperties.map((property) => (
             <PropertyCard key={property.id} property={property} />

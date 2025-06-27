@@ -128,19 +128,7 @@ const Header = () => {
                         </span>
                       </Link>
                     ))}
-                    <a
-                      key={"https://blog.gharpadharo.com/"}
-                      href={"https://blog.gharpadharo.com/"}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`text-md font-medium transition-colors ${
-                        pathname === "https://blog.gharpadharo.com/"
-                          ? "text-black"
-                          : "text-gray-600 hover:text-purple-600"
-                      }`}
-                    >
-                      Blog
-                    </a>
+    
                   </div>
                 </SheetContent>
               </Sheet>
