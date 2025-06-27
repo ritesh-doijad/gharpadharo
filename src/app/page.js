@@ -22,7 +22,7 @@ export default function Home() {
         initial={slideUp.initial}
         whileInView={slideUp.animate}
         transition={slideUp.transition}
-        viewport={{ once: false }}
+        viewport={{ once: true }}
       >
         <HeroSection />
       </motion.div>
@@ -32,7 +32,7 @@ export default function Home() {
         initial={scaleFade.initial}
         whileInView={scaleFade.animate}
         transition={scaleFade.transition}
-        viewport={{ once: false }}
+        viewport={{ once: true }}
       >
         <PropertiesList />
       </motion.div>
@@ -42,7 +42,7 @@ export default function Home() {
         initial={slideLeft.initial}
         whileInView={slideLeft.animate}
         transition={slideLeft.transition}
-        viewport={{ once: false }}
+        viewport={{ once: true }}
       >
         <WhyChooseUsSection />
       </motion.div>
@@ -62,7 +62,7 @@ export default function Home() {
         initial={fadeUpSoft.initial}
         whileInView={fadeUpSoft.animate}
         transition={fadeUpSoft.transition}
-        viewport={{ once: false }}
+        viewport={{ once: true }}
       >
         <PropertyBanner />
       </motion.div>
